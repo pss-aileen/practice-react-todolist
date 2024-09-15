@@ -1,11 +1,13 @@
+import { useState } from 'react';
 import ButtonUsega from './components/ButtonUsage';
 
 function App() {
+  const [test, setText] = useState('firstText');
   return (
     <>
       <h1>hello</h1>
-      <p>this is app</p>
-      <ButtonUsega />
+      <p>{test}</p>
+      <ButtonUsega setText={setText} />
     </>
   );
 }
