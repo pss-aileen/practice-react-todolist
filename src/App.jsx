@@ -1,11 +1,10 @@
-import { useState, useReducer } from 'react';
+import { useReducer } from 'react';
 import Tasks from './components/Tasks/Tasks';
 import AddTaskForm from './components/AddTaskForm/AddTaskForm';
 import Container from '@mui/material/Container';
 import tasksReducer from './reducer/tasksReducer';
 
 function App() {
-  // const [tasks, setTasks] = useState(initialTasks);
   const [tasks, dispatch] = useReducer(tasksReducer, initialTasks);
 
   // useReducerのところでは、値をただ渡すだけなイメージ、本格的な操作はReducerでやる
