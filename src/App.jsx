@@ -1,48 +1,42 @@
-import { useState } from 'react';
+import { useState, useReducer } from 'react';
 import Tasks from './components/Tasks/Tasks';
 import AddTaskForm from './components/AddTaskForm/AddTaskForm';
 import Container from '@mui/material/Container';
+import tasksReducer from './reducer/tasksReducer';
 
 function App() {
-  const [tasks, setTasks] = useState(initialTasks);
+  // const [tasks, setTasks] = useState(initialTasks);
+  const [tasks, dispatch] = useReducer(tasksReducer, initialTasks);
+
+  // useReducerのところでは、値をただ渡すだけなイメージ、本格的な操作はReducerでやる
 
   function handleAddTask(text) {
-    setTasks([
-      ...tasks,
-      {
-        id: tasks.length,
-        text: text,
-        checked: false,
-      },
-    ]);
+    dispatch({
+      type: 'add',
+      text: text,
+    });
   }
 
   function handleChangeTask(id, text) {
-    setTasks(
-      tasks.map((t) => {
-        if (t.id === id) {
-          t.text = text;
-        }
-        return t;
-      })
-    );
+    dispatch({
+      type: 'change',
+      id: id,
+      text: text,
+    });
   }
 
   function handleChangeTaskChecked(id) {
-    setTasks(
-      tasks.map((t) => {
-        if (t.id === id) {
-          t.checked = !t.checked;
-        }
-        return t;
-      })
-    );
-
-    console.log(tasks);
+    dispatch({
+      type: 'changeChecked',
+      id: id,
+    });
   }
 
   function handleDeleteTask(id) {
-    setTasks(tasks.filter((t) => t.id !== id));
+    dispatch({
+      type: 'delete',
+      id: id,
+    });
   }
 
   return (
