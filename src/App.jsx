@@ -10,6 +10,8 @@ function App() {
 
   // useReducerのところでは、値をただ渡すだけなイメージ、本格的な操作はReducerでやる
 
+  console.log(tasks);
+
   return (
     <>
       <TasksContext.Provider value={tasks}>
