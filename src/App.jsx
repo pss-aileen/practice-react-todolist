@@ -1,13 +1,19 @@
 import { useState } from 'react';
-import ButtonUsega from './components/ButtonUsage';
+import Tasks from './components/Tasks/Tasks';
+import AddTaskForm from './components/AddTaskForm/AddTaskForm';
+import CssBaseline from '@mui/material/CssBaseline';
+import Container from '@mui/material/Container';
 
 function App() {
-  const [test, setText] = useState('firstText');
   return (
     <>
-      <h1>hello</h1>
-      <p>{test}</p>
-      <ButtonUsega setText={setText} />
+      <CssBaseline />
+      <Container maxWidth='xs'>
+        <h1>Todo List</h1>
+
+        <AddTaskForm />
+        <Tasks />
+      </Container>
     </>
   );
 }
