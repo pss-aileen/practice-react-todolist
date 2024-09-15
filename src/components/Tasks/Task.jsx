@@ -20,19 +20,17 @@ export default function Task({ id, text, checked }) {
     setIsEditting(false);
   }
 
+  function handleChange() {
+    dispatch({
+      type: 'changeChecked',
+      id: id,
+    });
+  }
+
   return (
     <li>
       <div>
-        <input
-          type='checkbox'
-          checked={checked}
-          onChange={() => {
-            dispatch({
-              type: 'changeChecked',
-              id: id,
-            });
-          }}
-        />
+        <input type='checkbox' checked={checked} onChange={handleChange} />
         {isEditting ? <input type='text' value={newText} onChange={(e) => setNewText(e.target.value)} /> : <span>{text}</span>}
 
         {isEditting ? <button onClick={() => handleEditDone()}>Edit Done</button> : <button onClick={() => handleEdit()}>Edit</button>}
