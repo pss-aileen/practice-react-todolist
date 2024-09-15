@@ -10,10 +10,14 @@ export default function tasksReducer(tasks, action) {
         },
       ];
     }
+
     case 'change': {
       return tasks.map((t) => {
         if (t.id === action.id) {
-          t.text = action.text;
+          return {
+            ...t,
+            text: action.text,
+          };
         }
         return t;
       });
@@ -23,6 +27,10 @@ export default function tasksReducer(tasks, action) {
       return tasks.map((t) => {
         if (t.id === action.id) {
           t.checked = !t.checked;
+          return {
+            ...t,
+            checked: !t.checked,
+          };
         }
         return t;
       });
