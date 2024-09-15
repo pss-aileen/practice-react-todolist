@@ -10,35 +10,6 @@ function App() {
 
   // useReducerのところでは、値をただ渡すだけなイメージ、本格的な操作はReducerでやる
 
-  // function handleAddTask(text) {
-  //   dispatch({
-  //     type: 'add',
-  //     text: text,
-  //   });
-  // }
-
-  // function handleChangeTask(id, text) {
-  //   dispatch({
-  //     type: 'change',
-  //     id: id,
-  //     text: text,
-  //   });
-  // }
-
-  // function handleChangeTaskChecked(id) {
-  //   dispatch({
-  //     type: 'changeChecked',
-  //     id: id,
-  //   });
-  // }
-
-  // function handleDeleteTask(id) {
-  //   dispatch({
-  //     type: 'delete',
-  //     id: id,
-  //   });
-  // }
-
   return (
     <>
       <TasksContext.Provider value={tasks}>
