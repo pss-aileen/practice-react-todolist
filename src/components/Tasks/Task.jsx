@@ -8,10 +8,12 @@ import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
 import Box from '@mui/system/Box';
 import Input from '@mui/material/Input';
+import Confirm from './Confirm';
 
 export default function Task({ id, text, checked }) {
   const [isEditting, setIsEditting] = useState(false);
   const [newText, setNewText] = useState(text);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const dispatch = useContext(TasksDispatchContext);
 
@@ -35,6 +37,10 @@ export default function Task({ id, text, checked }) {
     });
   }
 
+  function handleDelete() {
+    setModalIsOpen(true);
+  }
+
   return (
     <ListItem disablePadding>
       <Box sx={{ display: 'flex', flexGrow: 1, justifyContent: 'space-between', gap: '16px', alignItems: 'center' }}>
@@ -54,19 +60,11 @@ export default function Task({ id, text, checked }) {
             </IconButton>
           )}
 
-          <IconButton
-            aria-label='delete'
-            onClick={() =>
-              dispatch({
-                type: 'delete',
-                id: id,
-              })
-            }
-            size='small'
-          >
+          <IconButton aria-label='delete' onClick={() => handleDelete()} size='small'>
             <DeleteIcon fontSize='small' />
           </IconButton>
         </div>
+        <Confirm id={id} text={text} isOpen={modalIsOpen} setIsOpen={setModalIsOpen} />
       </Box>
     </ListItem>
   );
