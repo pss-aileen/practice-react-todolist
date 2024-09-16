@@ -8,7 +8,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
 import Box from '@mui/system/Box';
 import Input from '@mui/material/Input';
-import Alert from './Alert';
+import Confirm from './Confirm';
 
 export default function Task({ id, text, checked }) {
   const [isEditting, setIsEditting] = useState(false);
@@ -64,7 +64,7 @@ export default function Task({ id, text, checked }) {
             <DeleteIcon fontSize='small' />
           </IconButton>
         </div>
-        <Alert id={id} text={text} isOpen={modalIsOpen} setIsOpen={setModalIsOpen} />
+        <Confirm id={id} text={text} isOpen={modalIsOpen} setIsOpen={setModalIsOpen} />
       </Box>
     </ListItem>
   );
