@@ -1,34 +1,57 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { TasksDispatchContext } from '../../context/TasksContext';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import Stack from '@mui/material/Stack';
+import { Box } from '@mui/material';
 
 export default function AddTaskForm() {
   const [text, setText] = useState('');
+  const [formInfo, setFormInfo] = useState({
+    label: 'Task',
+    helperText: '',
+    isError: false,
+  });
 
   const dispatch = useContext(TasksDispatchContext);
 
+  function handleClick(e) {
+    e.preventDefault();
+
+    if (text.trim() !== '') {
+      dispatch({
+        type: 'add',
+        text: text,
+      });
+      setText('');
+    } else {
+      setFormInfo({
+        label: 'Error',
+        helperText: '*Required minimum 3 chars.',
+        isError: true,
+      });
+    }
+  }
+
+  if (formInfo.isError && text.trim() !== '') {
+    setFormInfo({
+      label: 'Task',
+      helperText: '',
+      isError: false,
+    });
+  }
+
   return (
     <form>
-      <Stack direction='row' spacing={1}>
-        <TextField id='outlined-size-small' label='Todo' size='small' value={text} onChange={(e) => setText(e.target.value)} fullWidth />
+      <Box sx={{ display: 'flex', gap: '4px', alignItems: 'flex-start' }}>
+        {/* <Stack direction='row' spacing={1}> */}
+        <TextField id='outlined-size-small' label={formInfo.label} size='small' value={text} onChange={(e) => setText(e.target.value)} helperText={formInfo.helperText} error={formInfo.isError} fullWidth />
+        {/* <TextField id='outlined-size-small' size='small' value={text} onChange={(e) => setText(e.target.value)} label='Error' helperText='*Required minimum 3 chars.' fullWidth error /> */}
 
-        <Button
-          type='submit'
-          variant='contained'
-          onClick={(e) => {
-            e.preventDefault();
-            dispatch({
-              type: 'add',
-              text: text,
-            });
-            setText('');
-          }}
-        >
+        <Button type='submit' variant='contained' onClick={handleClick} sx={{ paddingTop: '7.75px', paddingBottom: '7.75px' }}>
           Add
         </Button>
-      </Stack>
+        {/* </Stack> */}
+      </Box>
     </form>
   );
 }
