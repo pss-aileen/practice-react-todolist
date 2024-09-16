@@ -10,32 +10,25 @@ export default function AddTaskForm() {
   const dispatch = useContext(TasksDispatchContext);
 
   return (
-    <Stack direction='row' spacing={1}>
-      <TextField id='outlined-size-small' label='Todo' size='small' value={text} onChange={(e) => setText(e.target.value)} fullWidth />
-      {/* <input type='text' value={text} onChange={(e) => setText(e.target.value)} /> */}
-      <Button
-        variant='contained'
-        onClick={() => {
-          dispatch({
-            type: 'add',
-            text: text,
-          });
-          setText('');
-        }}
-      >
-        Add
-      </Button>
-      {/* <button
-        onClick={() => {
-          dispatch({
-            type: 'add',
-            text: text,
-          });
-          setText('');
-        }}
-      >
-        add
-      </button> */}
-    </Stack>
+    <form>
+      <Stack direction='row' spacing={1}>
+        <TextField id='outlined-size-small' label='Todo' size='small' value={text} onChange={(e) => setText(e.target.value)} fullWidth />
+
+        <Button
+          type='submit'
+          variant='contained'
+          onClick={(e) => {
+            e.preventDefault();
+            dispatch({
+              type: 'add',
+              text: text,
+            });
+            setText('');
+          }}
+        >
+          Add
+        </Button>
+      </Stack>
+    </form>
   );
 }
