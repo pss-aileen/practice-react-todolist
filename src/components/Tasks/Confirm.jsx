@@ -27,15 +27,15 @@ export default function Alert({ id, text, isOpen, setIsOpen }) {
 
   return (
     <>
-      <Dialog open={isOpen} onClose={handleClose} aria-labelledby='alert-dialog-title' aria-describedby='alert-dialog-description'>
-        <DialogTitle id='alert-dialog-title'>{'Delete this task?'}</DialogTitle>
+      <Dialog open={isOpen} onClose={() => handleClose(false)} aria-labelledby='alert-dialog-title' aria-describedby='alert-dialog-description'>
+        <DialogTitle id='alert-dialog-title'>{'Do you want to delete this task?'}</DialogTitle>
         <DialogContent>
           <DialogContentText id='alert-dialog-description'>{text}</DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Disagree</Button>
-          <Button onClick={handleClose} autoFocus variant='contained'>
-            Agree
+          <Button onClick={() => handleClose(false)}>No</Button>
+          <Button onClick={() => handleClose(true)} autoFocus variant='contained'>
+            Yes
           </Button>
         </DialogActions>
       </Dialog>
