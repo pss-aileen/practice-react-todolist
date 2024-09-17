@@ -18,7 +18,7 @@ export default function AddTaskForm() {
     e.preventDefault();
 
     if (text.trim() !== '') {
-      const date = Date.now();
+      const date = Date.now().toString();
       dispatch({
         type: 'add',
         text: text,
