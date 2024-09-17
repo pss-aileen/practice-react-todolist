@@ -15,9 +15,6 @@ export default function SuccessMessage() {
     setMessageIsOpen(false);
   };
 
-  // https://mui.com/material-ui/react-snackbar/#position
-  // ポジション設定
-
   return (
     <Snackbar open={MessageIsOpen} autoHideDuration={2000} onClose={handleClose} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
       <Alert onClose={handleClose} severity='success' sx={{ width: '100%' }}>

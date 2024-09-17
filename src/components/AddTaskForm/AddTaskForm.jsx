@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useState } from 'react';
 import { TasksDispatchContext } from '../../context/TasksContext';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -45,14 +45,11 @@ export default function AddTaskForm() {
   return (
     <form>
       <Box sx={{ display: 'flex', gap: '4px', alignItems: 'flex-start' }}>
-        {/* <Stack direction='row' spacing={1}> */}
         <TextField id='outlined-size-small' label={formInfo.label} size='small' value={text} onChange={(e) => setText(e.target.value)} helperText={formInfo.helperText} error={formInfo.isError} fullWidth />
-        {/* <TextField id='outlined-size-small' size='small' value={text} onChange={(e) => setText(e.target.value)} label='Error' helperText='*Required minimum 3 chars.' fullWidth error /> */}
 
         <Button type='submit' variant='contained' onClick={handleClick} sx={{ paddingTop: '7.75px', paddingBottom: '7.75px' }}>
           Add
         </Button>
-        {/* </Stack> */}
       </Box>
     </form>
   );
