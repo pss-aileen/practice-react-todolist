@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { TasksDispatchContext } from '../../context/TasksContext';
 import Checkbox from '@mui/material/Checkbox';
 import ListItem from '@mui/material/ListItem';
@@ -14,6 +14,7 @@ export default function Task({ id, text, checked }) {
   const [isEditting, setIsEditting] = useState(false);
   const [newText, setNewText] = useState(text);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const inputComponentRef = useRef(null);
 
   const dispatch = useContext(TasksDispatchContext);
 
@@ -29,6 +30,12 @@ export default function Task({ id, text, checked }) {
     });
     setIsEditting(false);
   }
+
+  useEffect(() => {
+    if (isEditting && inputComponentRef.current.querySelector('input')) {
+      inputComponentRef.current.querySelector('input').focus();
+    }
+  }, [isEditting]);
 
   function handleChange() {
     dispatch({
@@ -53,7 +60,7 @@ export default function Task({ id, text, checked }) {
           <Box sx={{ flex: 1, maxWidth: '100%', display: 'flex', alignItems: 'center' }}>
             <Checkbox size='small' checked={checked} onChange={handleChange} id={id.toString()} />
             <label htmlFor={id} style={{ width: '100%', cursor: 'pointer' }}>
-              {isEditting ? <Input type='text' value={newText} onChange={(e) => setNewText(e.target.value)} fullWidth /> : <span>{text}</span>}
+              {isEditting ? <Input type='text' value={newText} onChange={(e) => setNewText(e.target.value)} ref={inputComponentRef} fullWidth /> : <span>{text}</span>}
             </label>
           </Box>
 
