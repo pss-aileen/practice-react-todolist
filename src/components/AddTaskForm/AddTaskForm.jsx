@@ -18,9 +18,11 @@ export default function AddTaskForm() {
     e.preventDefault();
 
     if (text.trim() !== '') {
+      const date = Date.now();
       dispatch({
         type: 'add',
         text: text,
+        id: date,
       });
       setText('');
     } else {

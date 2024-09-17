@@ -4,7 +4,7 @@ export default function tasksReducer(tasks, action) {
       return [
         ...tasks,
         {
-          id: tasks.length,
+          id: action.id,
           text: action.text,
           checked: false,
         },
