@@ -1,4 +1,4 @@
-import { useReducer, useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import Tasks from './components/Tasks/Tasks';
 import AddTaskForm from './components/AddTaskForm/AddTaskForm';
 import Container from '@mui/material/Container';
@@ -8,11 +8,12 @@ import { SuccessMessageContext } from './context/SuccessMessageContext';
 import SuccessMessage from './components/Tasks/SuccessMessage';
 
 function App() {
-  const [tasks, dispatch] = useReducer(tasksReducer, initialTasks);
+  const [tasks, dispatch] = useReducer(tasksReducer, JSON.parse(localStorage.getItem('tasks')).length > 0 ? JSON.parse(localStorage.getItem('tasks')) : initialTasks);
   const [MessageIsOpen, setMessageIsOpen] = useState(false);
-  // useReducerのところでは、値をただ渡すだけなイメージ、本格的な操作はReducerでやる
 
-  console.log(tasks);
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]);
 
   return (
     <>
@@ -37,18 +38,18 @@ export default App;
 
 const initialTasks = [
   {
-    id: 0,
-    text: 'テキストです。1',
+    id: 'initialTask01',
+    text: 'Google Timothée',
     checked: true,
   },
   {
-    id: 1,
-    text: 'テキストです。2',
+    id: 'initialTask02',
+    text: 'Watch Wonka',
     checked: false,
   },
   {
-    id: 2,
-    text: 'テキストです。3',
+    id: 'initialTask03',
+    text: 'Listen to Pure Imagination',
     checked: false,
   },
 ];
