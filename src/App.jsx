@@ -8,7 +8,7 @@ import { SuccessMessageContext } from './context/SuccessMessageContext';
 import SuccessMessage from './components/Tasks/SuccessMessage';
 
 function App() {
-  const [tasks, dispatch] = useReducer(tasksReducer, JSON.parse(localStorage.getItem('tasks')).length > 0 ? JSON.parse(localStorage.getItem('tasks')) : initialTasks);
+  const [tasks, dispatch] = useReducer(tasksReducer, JSON.parse(localStorage.getItem('tasks')) && JSON.parse(localStorage.getItem('tasks')).length > 0 ? JSON.parse(localStorage.getItem('tasks')) : initialTasks);
   const [MessageIsOpen, setMessageIsOpen] = useState(false);
 
   useEffect(() => {
